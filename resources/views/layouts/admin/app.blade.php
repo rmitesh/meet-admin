@@ -12,6 +12,9 @@
         <link rel="stylesheet" href="{{ asset('assets/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/admin/css/adminlte.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+
+        @section('header-style')
+        @show
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
@@ -24,11 +27,16 @@
 
             <x-admin.sidebar />
 
+            <div class="content-wrapper">
+                @yield('content')
+            </div>
         </div>
 
         <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
         <script src="{{ asset('assets/admin/js/adminlte.js') }}"></script>
         
+        @section('footer-script')
+        @show
     </body>
 </html>
