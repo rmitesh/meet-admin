@@ -10,6 +10,12 @@ class DashboardController extends Controller
     public function index() {
         $this->data = array(
             'title' => 'Admin Dashboard | ',
+            'breadcrumbs' => array(
+                'title' => 'Dashboard',
+                'breadcrumb' => array(
+                    '#' => 'Dashboard'
+                ),
+            ),
         );
         return view('admin.dashboard', $this->data);
     }

@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PermissionController;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,11 @@ Route::get('/dashboard', function () {
 
 Route::group(array('prefix' => 'admin', 'middleware' => array('auth')), function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+    // For Super Admin
+    Route::get('/permission', [PermissionController::class, 'index'])->name('admin.permission.index');
+    Route::get('/permission/create', [PermissionController::class, 'create'])->name('admin.permission.create');
+    Route::post('/permission/store', [PermissionController::class, 'store'])->name('admin.permission.store');
 });
 
 require __DIR__.'/auth.php';
