@@ -29,6 +29,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth')), function
     Route::get('/permission', [PermissionController::class, 'index'])->name('admin.permission.index');
     Route::get('/permission/create', [PermissionController::class, 'create'])->name('admin.permission.create');
     Route::post('/permission/store', [PermissionController::class, 'store'])->name('admin.permission.store');
+    Route::get('/permission/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
+    Route::put('/permission/update/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
+    Route::delete('/permission/delete/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.delete');
 });
 
 require __DIR__.'/auth.php';

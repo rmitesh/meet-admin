@@ -19,6 +19,8 @@
 			  	<div class="col-12">
 			  		<div class="card">
 			  			<div class="card-header">
+				  			<x-auth-session-status class="alert-success" :status="session('status')" />
+				  			<x-auth-validation-errors class="alert-danger" :errors="$errors" />
 			  				<div class="d-flex justify-content-between align-items-center">
 			  					<div>
 				  					<h3 class="card-title">Permissions List</h3>
