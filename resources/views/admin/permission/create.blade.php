@@ -18,13 +18,11 @@
 		  					<h3 class="card-title">Create Permission</h3>
 			  			</div>
 			  			<div class="card-body">
+							<x-auth-session-status class="alert-success" :status="session('status')" />
+							<x-auth-validation-errors class="alert-danger" :errors="$errors" />
+							
 			  				<div class="row">
 			  					<div class="col-md-8">
-									<!-- Session Status -->
-									<x-auth-session-status class="mb-4" :status="session('status')" />
-
-									<!-- Validation Errors -->
-									<x-auth-validation-errors class="mb-4" :errors="$errors" />
 
 									<form action="{{ route('admin.permission.store') }}" method="post" autocomplete="off">
 										@csrf
