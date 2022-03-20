@@ -78,17 +78,17 @@ class RoleController extends Controller
     }
 
     public function store( Request $request ) {
-        $validtedData = $request->validate(array(
+        $validatedData = $request->validate(array(
             'name' => array('required', 'string', 'unique:roles,name'),
             'permissions' => array('required', 'array'),
         ));
 
         $role = Role::create(array(
-            'name' => $validtedData['name'],
+            'name' => $validatedData['name'],
         ));
 
         if ($role) {
-            $role->permissions()->sync($validtedData['permissions']);
+            $role->permissions()->sync($validatedData['permissions']);
             if (isset($request->save_and_new)) {
                 return redirect()->back()->withStatus('New role has been created.');
             }
@@ -132,17 +132,17 @@ class RoleController extends Controller
     }
 
     public function update( Request $request, $id ) {
-        $validtedData = $request->validate(array(
+        $validatedData = $request->validate(array(
             'name' => array('required', 'string', 'unique:roles,name,'.$id),
             'permissions' => array('required', 'array'),
         ));
 
         $role = Role::where(array('id' => $id))->update(array(
-            'name' => $validtedData['name'],
+            'name' => $validatedData['name'],
         ));
 
         if ( $role ) {
-            Role::find($id)->permissions()->sync($validtedData['permissions']);
+            Role::find($id)->permissions()->sync($validatedData['permissions']);
             return redirect()->route('admin.role.index')->withStatus('Role has been updated.');
         }
         return redirect()->back()->withErrors('Something went wrong while update role')->withInput();

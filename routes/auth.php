@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::group(['prefix' => 'admin'], function() {
+        Route::get('/', [AdminAuthenticatedSessionController::class, 'index'])
+                    ->name('admin.index');
+
         Route::get('login', [AdminAuthenticatedSessionController::class, 'create'])
                     ->name('admin.login');
 

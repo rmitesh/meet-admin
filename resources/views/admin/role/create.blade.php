@@ -32,7 +32,7 @@
 									  	</div>
 
 										<div class="form-group">
-									    	<label for="name">Permissions <span class="text-danger">*</span></label>
+									    	<label>Permissions <span class="text-danger">*</span></label>
 									    	<div class="row">
 									    		@if (!empty($permissions))
 		    						    			<div class="col-12">
