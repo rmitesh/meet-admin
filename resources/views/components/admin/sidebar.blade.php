@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript: void(0);" class="nav-link">
+                            <a href="{{ route('admin.role.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Role</p>
                             </a>

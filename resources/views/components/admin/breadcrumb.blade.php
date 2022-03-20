@@ -10,10 +10,10 @@
 						<ol class="breadcrumb float-sm-right">
 							@foreach ($breadcrumbs['breadcrumb'] as $route => $breadcrumb)
 								<li class="breadcrumb-item {{ $route !== '#' ?: 'active' }}">
-									@if ($route == '#')
-										{{ $breadcrumb }}
-									@else
+									@if ($route != '#' && $route != '')
 										<a href="{{ $route !== '#' ? route($route) : $route }}">{{ $breadcrumb }}</a>
+									@else
+										{{ $breadcrumb }}
 									@endif
 								</li>
 							@endforeach
