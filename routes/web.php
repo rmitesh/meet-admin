@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,23 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth')), function
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // For Super Admin
+
+    // permissions
     Route::get('/permission', [PermissionController::class, 'index'])->name('admin.permission.index');
     Route::get('/permission/create', [PermissionController::class, 'create'])->name('admin.permission.create');
     Route::post('/permission/store', [PermissionController::class, 'store'])->name('admin.permission.store');
     Route::get('/permission/edit/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
     Route::put('/permission/update/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
     Route::delete('/permission/delete/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.delete');
+
+    // roles
+    Route::get('/role', [RoleController::class, 'index'])->name('admin.role.index');
+    Route::get('/role/create', [RoleController::class, 'create'])->name('admin.role.create');
+    Route::post('/role/store', [RoleController::class, 'store'])->name('admin.role.store');
+    Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('admin.role.edit');
+    Route::put('/role/update/{id}', [RoleController::class, 'update'])->name('admin.role.update');
+    Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('admin.role.delete');
+
 });
 
 require __DIR__.'/auth.php';

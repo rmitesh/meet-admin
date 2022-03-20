@@ -44,7 +44,7 @@ class PermissionController extends Controller
                 'title' => 'Permission',
                 'breadcrumb' => array(
                     'admin.dashboard' => 'Dashboard',
-                    '#' => 'Roles and Permissions',
+                    '' => 'Roles and Permissions',
                     '#' => 'Permission',
                 ),
             ),
@@ -57,12 +57,12 @@ class PermissionController extends Controller
         $this->data = array(
             'title' => 'Create Permission | ',
             'breadcrumbs' => array(
-                'title' => 'Create Permission',
+                'title' => 'Permission',
                 'breadcrumb' => array(
                     'admin.dashboard' => 'Dashboard',
                     '#' => 'Roles and Permissions',
-                    '#' => 'Permission',
-                    '#' => 'Create',
+                    'admin.permission.index' => 'Permission',
+                    '' => 'Create',
                 ),
             ),
         );
@@ -83,5 +83,67 @@ class PermissionController extends Controller
             return redirect()->route('admin.permission.index')->withStatus('New permission has been created.');
         }
         return redirect()->back()->withErrors('Something went wrong while create permission')->withInput();
+    }
+
+    public function edit( $id ) {
+        $permission = Permission::select(array(
+            'id', 'name'
+        ))->findOrFail($id);
+
+        $this->data = array(
+            'title' => 'Edit Permission | ',
+            'breadcrumbs' => array(
+                'title' => 'Permission',
+                'breadcrumb' => array(
+                    'admin.dashboard' => 'Dashboard',
+                    '#' => 'Roles and Permissions',
+                    'admin.permission.index' => 'Permission',
+                    '' => 'Edit',
+                ),
+            ),
+        );
+
+        $this->data['permission'] = $permission;
+
+        return view('admin.permission.edit', $this->data);
+    }
+
+    public function update( Request $request, $id ) {
+        $validtedData = $request->validate(array(
+            'name' => array('required', 'string', 'unique:permissions,name,'.$id),
+        ));
+
+        $permission = Permission::where(array('id' => $id))->update($validtedData);
+        if ($permission) {
+            if (isset($request->save_and_new)) {
+                return redirect()->back()->withStatus('New permission has been created.');
+            }
+            return redirect()->route('admin.permission.index')->withStatus('Permission has been updated.');
+        }
+        return redirect()->back()->withErrors('Something went wrong while update permission')->withInput();
+    }
+
+    public function destroy( Request $request, $id ) {
+        $permission = Permission::findOrFail($id);
+
+        if ( $permission ) {
+            if ( $permission->delete() ) {
+                $this->data = array(
+                    'status' => true,
+                    'message' => 'Permission has been deleted.',
+                );
+            } else {
+                $this->data = array(
+                    'status' => false,
+                    'message' => 'Something went wrong while delete the permission.',
+                );
+            }
+        } else {
+            $this->data = array(
+                'status' => false,
+                'message' => 'Someting went wrong, Permission not found.',
+            );
+        }
+        return response()->json($this->data);
     }
 }

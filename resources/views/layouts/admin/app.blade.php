@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>{{ !isset($title)?:$title }}{{ config('app.name') }}</title>
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -11,6 +14,7 @@
         <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/admin/css/adminlte.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/admin/plugins/sweetalert/sweetalert2.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
         @section('header-style')
@@ -35,6 +39,8 @@
         <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
         <script src="{{ asset('assets/admin/js/adminlte.js') }}"></script>
+        <script src="{{ asset('assets/admin/plugins/sweetalert/sweetalert2.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/custom/common.min.js') }}"></script>
         
         @section('footer-script')
         @show
