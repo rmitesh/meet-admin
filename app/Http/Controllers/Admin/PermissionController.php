@@ -71,11 +71,11 @@ class PermissionController extends Controller
     }
 
     public function store( Request $request ) {
-        $validtedData = $request->validate(array(
+        $validatedData = $request->validate(array(
             'name' => array('required', 'string', 'unique:permissions,name'),
         ));
 
-        $permission = Permission::create($validtedData);
+        $permission = Permission::create($validatedData);
         if ($permission) {
             if (isset($request->save_and_new)) {
                 return redirect()->back()->withStatus('New permission has been created.');
@@ -109,11 +109,11 @@ class PermissionController extends Controller
     }
 
     public function update( Request $request, $id ) {
-        $validtedData = $request->validate(array(
+        $validatedData = $request->validate(array(
             'name' => array('required', 'string', 'unique:permissions,name,'.$id),
         ));
 
-        $permission = Permission::where(array('id' => $id))->update($validtedData);
+        $permission = Permission::where(array('id' => $id))->update($validatedData);
         if ($permission) {
             if (isset($request->save_and_new)) {
                 return redirect()->back()->withStatus('New permission has been created.');

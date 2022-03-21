@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::group(['prefix' => 'admin'], function() {
+        Route::get('/', [AdminAuthenticatedSessionController::class, 'index'])
+                    ->name('admin.index');
+
         Route::get('login', [AdminAuthenticatedSessionController::class, 'create'])
                     ->name('admin.login');
 
@@ -57,6 +60,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::group(['prefix' => 'admin'], function() {
+        Route::post('logout', [AdminAuthenticatedSessionController::class, 'destroy'])
+                ->name('admin.logout');
+    });
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
                 ->name('verification.notice');
 

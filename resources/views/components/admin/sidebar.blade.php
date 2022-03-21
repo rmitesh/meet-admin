@@ -11,9 +11,16 @@
             <div class="image">
                 <img src="{{ asset('assets/admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
-            <div class="info">
-                <a href="javascript: void(0);" class="d-block">{{ auth()->user()->fullName }}</a>
+            <div class="info d-flex">
+                <a href="javascript: void(0);" class="d-block mr-3">{{ auth()->user()->fullName }}</a>
                 {{-- Profile Link --}}
+                <form method="POST" action="{{ route('admin.logout') }}">
+                    @csrf
+                    
+                    <a href="{{ route('admin.logout') }}" title="Logout" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <i class="fas fa-fw fa-sign-out-alt"></i>
+                    </a>
+                </form>
             </div>
         </div>
         <!-- SidebarSearch Form -->
@@ -31,13 +38,16 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link {{ is_active('admin.dashboard') }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {{ is_active(array(
+                        'admin.role.index', 'admin.role.create', 'admin.role.edit',
+                        'admin.permission.index', 'admin.permission.create', 'admin.permission.edit',
+                    ), 'menu-open') }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-lock"></i>
                         <p>
@@ -45,20 +55,35 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('admin.permission.index') }}" class="nav-link">
+                            <a href="{{ route('admin.permission.index') }}" class="nav-link {{ is_active(array(
+                                'admin.permission.index', 'admin.permission.create', 'admin.permission.edit',
+                            )) }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Permission</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="{{ route('admin.role.index') }}" class="nav-link">
+                            <a href="{{ route('admin.role.index') }}" class="nav-link {{ is_active(array(
+                                'admin.role.index', 'admin.role.create', 'admin.role.edit',
+                            )) }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Role</p>
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.user.index') }}" class="nav-link {{ is_active(array(
+                        'admin.user.index', 'admin.user.create', 'admin.user.edit',
+                    )) }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Users</p>
+                    </a>
                 </li>
             </ul>
         </nav>

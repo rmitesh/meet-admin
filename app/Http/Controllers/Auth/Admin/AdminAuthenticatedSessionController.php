@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuthenticatedSessionController extends Controller
 {
+    public function index() {
+        return redirect()->route('admin.login');
+    }
+    
     /**
      * Display the login view.
      *
