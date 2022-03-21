@@ -17,6 +17,7 @@ class CreatePasswordResetsTable extends Migration
             $table->string('email', 191)->index();
             $table->string('token', 191);
             $table->timestamp('created_at')->nullable();
+            $table->engine = 'InnoDB';
         });
     }
 

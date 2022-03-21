@@ -22,6 +22,11 @@ if (! function_exists('is_active')) {
 }
 
 if (! function_exists('get_roles')) {
+    /**
+     * Get logged in user role list
+     * 
+     * @return array
+     */
     function get_roles() {
         if (auth()->check()) {
             $user_roles = auth()->user()->getRoleNames('roles')->toArray();
@@ -32,6 +37,11 @@ if (! function_exists('get_roles')) {
 }
 
 if (! function_exists('get_ignore_roles')) {
+    /**
+     * Get Ingore user role list
+     * 
+     * @return array
+     */
     function get_ignore_roles() {
         $roles = array();
         $user_roles = get_roles();
@@ -55,14 +65,34 @@ if (! function_exists('get_ignore_roles')) {
 }
 
 if (! function_exists('random_password')) {
+    /**
+     * Generate random password
+     * 
+     * @param  integer      $length     number of length of password
+     * @return string
+     */
     function random_password( $length = 8 ) {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array(); //remember to declare $pass as an array
-        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        $pass = array();
+        $alphaLength = strlen($alphabet) - 1;
         for ($i = 0; $i < $length; $i++) {
             $n = rand(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }
-        return implode($pass); //turn the array into a string
+        return implode($pass);
+    }
+}
+
+if (! function_exists('validateUserRole')) {
+    /**
+     * Validate user role if end user will not modify Administration privileges.
+     * 
+     * @param  int|string       $id     User ID
+     * @return App\Models\User
+     */
+    function validateUserRole( $id ) {
+        return User::whereHas('roles', function ( $query ) {
+            return $query->whereNotIn('name', get_ignore_roles());
+        })->where('id', $id)->first();
     }
 }
