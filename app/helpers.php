@@ -21,18 +21,24 @@ if (! function_exists('is_active')) {
     }
 }
 
-if (! function_exists('get_roles')) {
+if (! function_exists('get_user_role')) {
     /**
-     * Get logged in user role list
-     * 
-     * @return array
+     * Get logged in user role
+     * @param  boolean      $multi_roles    flag for return role list
+     * @return string|array
      */
-    function get_roles() {
+    function get_user_role( $multi_roles = false ) {
         if (auth()->check()) {
-            $user_roles = auth()->user()->getRoleNames('roles')->toArray();
-            return $user_roles;
+            if ( $multi_roles ) {
+                $user_roles = auth()->user()->getRoleNames('roles')->toArray();
+                return $user_roles;
+            } else {
+                if ($role = auth()->user()->roles()->first()) {
+                    return $role->name;
+                }
+            }
         }
-        return array();
+        return null;
     }
 }
 
@@ -44,7 +50,7 @@ if (! function_exists('get_ignore_roles')) {
      */
     function get_ignore_roles() {
         $roles = array();
-        $user_roles = get_roles();
+        $user_roles = get_user_role( true );
         if (in_array(User::SUPER_ADMIN, $user_roles)) {
             $roles = array(
                 User::SUPER_ADMIN,
