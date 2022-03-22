@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Models\User;
 use DataTables;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
     public function index( Request $request ) {
 
         if ( $request->ajax() ) {
-            $roles = Role::where('name', '!=', 'Super Admin')->latest()->get();
+            $roles = Role::where('name', '!=', User::SUPER_ADMIN)->latest()->get();
             return DataTables::of($roles)
                     ->addIndexColumn()
                     ->addColumn('name', function( $row ) {
