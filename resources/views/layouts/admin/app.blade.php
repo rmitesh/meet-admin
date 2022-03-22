@@ -34,6 +34,14 @@
             <div class="content-wrapper">
                 @yield('content')
             </div>
+            
+            <footer class="main-footer">
+                <strong>Copyright &copy; {{ date('Y') }} <a href="https://github.com/rmitesh" target="_black">Mitesh Rathod</a>.</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                    <b>Version</b> {{ config('app.version') }}
+                </div>
+            </footer>
         </div>
 
         <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
