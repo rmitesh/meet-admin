@@ -43,39 +43,40 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                @superadmin
+                    <li class="nav-item {{ is_active(array(
+                            'admin.role.index', 'admin.role.create', 'admin.role.edit',
+                            'admin.permission.index', 'admin.permission.create', 'admin.permission.edit',
+                        ), 'menu-open') }}">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user-lock"></i>
+                            <p>
+                                Roles and Permissions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
 
-                <li class="nav-item {{ is_active(array(
-                        'admin.role.index', 'admin.role.create', 'admin.role.edit',
-                        'admin.permission.index', 'admin.permission.create', 'admin.permission.edit',
-                    ), 'menu-open') }}">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-lock"></i>
-                        <p>
-                            Roles and Permissions
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.permission.index') }}" class="nav-link {{ is_active(array(
+                                    'admin.permission.index', 'admin.permission.create', 'admin.permission.edit',
+                                )) }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Permission</p>
+                                </a>
+                            </li>
 
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.permission.index') }}" class="nav-link {{ is_active(array(
-                                'admin.permission.index', 'admin.permission.create', 'admin.permission.edit',
-                            )) }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Permission</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('admin.role.index') }}" class="nav-link {{ is_active(array(
-                                'admin.role.index', 'admin.role.create', 'admin.role.edit',
-                            )) }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Role</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.role.index') }}" class="nav-link {{ is_active(array(
+                                    'admin.role.index', 'admin.role.create', 'admin.role.edit',
+                                )) }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Role</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endsuperadmin
 
                 <li class="nav-item">
                     <a href="{{ route('admin.user.index') }}" class="nav-link {{ is_active(array(

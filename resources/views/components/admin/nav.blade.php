@@ -9,7 +9,7 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <span class="nav-link">
-                Role: <a href="javascript: void(0);" class="text-muted">{{ auth()->user()->roles[0]->name }}</a>
+                Role: <a href="javascript: void(0);" class="text-muted">{{ get_user_role() }}</a>
             </span>
         </li>
     </ul>
