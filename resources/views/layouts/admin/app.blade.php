@@ -46,6 +46,8 @@
 
         <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        
         <script src="{{ asset('assets/admin/js/adminlte.js') }}"></script>
         <script src="{{ asset('assets/admin/plugins/sweetalert/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('assets/admin/custom/common.min.js') }}"></script>

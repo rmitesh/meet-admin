@@ -77,6 +77,15 @@
                         </ul>
                     </li>
                 @endsuperadmin
+                
+                @role(\App\Models\User::SUPER_ADMIN)
+                    <li class="nav-item">
+                        <a href="{{ route('admin.setting.index') }}" class="nav-link {{ is_active('admin.setting.index') }}">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>Setting</p>
+                        </a>
+                    </li>
+                @endrole
 
                 <li class="nav-item">
                     <a href="{{ route('admin.user.index') }}" class="nav-link {{ is_active(array(

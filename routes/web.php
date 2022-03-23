@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth')), function
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // For Super Admin
+    // setting
+    Route::get('/setting', [SettingController::class, 'index'])
+                ->middleware('role:'.User::SUPER_ADMIN)
+                ->name('admin.setting.index');
 
     // permissions
     Route::get('/permission', [PermissionController::class, 'index'])->name('admin.permission.index');
