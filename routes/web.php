@@ -31,9 +31,11 @@ Route::group(array('prefix' => 'admin', 'middleware' => array('auth')), function
 
     // For Super Admin
     // setting
-    Route::get('/setting', [SettingController::class, 'index'])
-                ->middleware('role:'.User::SUPER_ADMIN)
-                ->name('admin.setting.index');
+
+    Route::group(['middleware' => 'role:'.User::SUPER_ADMIN], function() {
+        Route::get('/setting', [SettingController::class, 'index'])->name('admin.setting.index');
+        Route::post('/setting/company-info', [SettingController::class, 'updateCompanyInfo'])->name('admin.setting.update-company-info');
+    });
 
     // permissions
     Route::get('/permission', [PermissionController::class, 'index'])->name('admin.permission.index');
