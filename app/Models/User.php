@@ -22,31 +22,31 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable = array(
         'first_name',
         'last_name',
         'email',
         'password',
-    ];
+    );
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
+    protected $hidden = array(
         'password',
         'remember_token',
-    ];
+    );
 
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
+    protected $casts = array(
         'email_verified_at' => 'datetime',
-    ];
+    );
 
     /* Mutators */
     public function getFullNameAttribute() {

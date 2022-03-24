@@ -102,3 +102,34 @@ if (! function_exists('validateUserRole')) {
         })->where('id', $id)->first();
     }
 }
+
+if (! function_exists('get_date_format_list')) {
+    /**
+     * Date Format List
+     * 
+     * @return array
+     */
+    function get_date_format_list() {
+        return array(
+            'd-m-Y' => date('d-m-Y'),
+            'Y-m-d' => date('Y-m-d'),
+        );
+    }
+}
+
+
+if (! function_exists('get_time_format_list')) {
+    /**
+     * Time Format List
+     * 
+     * @return array
+     */
+    function get_time_format_list() {
+        return array(
+            'H:i' => date('H:i') . '( 24 Hours )',
+            'h:i A' => date('h:i A') . ' ( 12 Hours ) ',
+        );
+    }
+}
+
+
