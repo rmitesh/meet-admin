@@ -17,7 +17,7 @@ class SettingController extends Controller
             'breadcrumbs' => array(
                 'title' => 'Setting',
                 'breadcrumb' => array(
-                    '#' => 'Dashboard',
+                    'admin.dashboard' => 'Dashboard',
                     '' => 'Setting'
                 ),
             ),
